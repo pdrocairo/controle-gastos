@@ -1,0 +1,40 @@
+[
+  {"model": "gastos.categoria", "pk": 101, "fields": {"nome": "comida"}},
+  {"model": "gastos.categoria", "pk": 102, "fields": {"nome": "transporte"}},
+  {"model": "gastos.categoria", "pk": 103, "fields": {"nome": "estudos"}},
+
+  {"model": "gastos.ciclo", "pk": 101, "fields": {
+    "conta": 1, "mes_referencia": "2026-10-01", "data_inicio": "2026-10-06",
+    "data_fechamento": "2026-10-30", "saldo_inicial": "700.00"}},
+  {"model": "gastos.ciclo", "pk": 102, "fields": {
+    "conta": 1, "mes_referencia": "2026-12-01", "data_inicio": "2026-12-06",
+    "data_fechamento": "2026-12-30", "saldo_inicial": "0.00"}},
+
+  {"model": "gastos.gastofixo", "pk": 101, "fields": {
+    "categoria": null, "conta": 1, "descricao": "Internet", "valor": "99.90", "dia_vencimento": 10}},
+  {"model": "gastos.gastofixo", "pk": 102, "fields": {
+    "categoria": 103, "conta": 1, "descricao": "Curso de Django", "valor": "49.90", "dia_vencimento": 20}},
+  {"model": "gastos.gastofixo", "pk": 103, "fields": {
+    "categoria": 1, "conta": 1, "descricao": "Academia", "valor": "89.00", "dia_vencimento": 5}},
+
+  {"model": "gastos.gasto", "pk": 101, "fields": {
+    "ciclo": 101, "categoria": 101, "descricao": "Mercado", "valor": "132.40", "data": "2026-10-08"}},
+  {"model": "gastos.gasto", "pk": 102, "fields": {
+    "ciclo": 101, "categoria": 102, "descricao": "Passagem de ônibus", "valor": "22.00", "data": "2026-10-12"}},
+  {"model": "gastos.gasto", "pk": 103, "fields": {
+    "ciclo": 101, "categoria": 2, "descricao": "Jantar", "valor": "85.00", "data": "2026-10-18"}},
+  {"model": "gastos.gasto", "pk": 104, "fields": {
+    "ciclo": 101, "categoria": 3, "descricao": "Cabo USB", "valor": "29.90", "data": "2026-10-25"}},
+
+  {"model": "gastos.gasto", "pk": 105, "fields": {
+    "ciclo": 1, "categoria": 101, "descricao": "Almoço", "valor": "27.50", "data": "2026-11-09"}},
+  {"model": "gastos.gasto", "pk": 106, "fields": {
+    "ciclo": 1, "categoria": 102, "descricao": "Uber", "valor": "18.70", "data": "2026-11-14"}},
+  {"model": "gastos.gasto", "pk": 107, "fields": {
+    "ciclo": 1, "categoria": 1, "descricao": "Cinema", "valor": "38.00", "data": "2026-11-21"}},
+  {"model": "gastos.gasto", "pk": 108, "fields": {
+    "ciclo": 1, "categoria": null, "descricao": "", "valor": "15.00", "data": "2026-11-27"}},
+
+  {"model": "gastos.gasto", "pk": 109, "fields": {
+    "ciclo": 102, "categoria": 101, "descricao": "Pizza (depois do fechamento)", "valor": "54.00", "data": "2026-11-30"}}
+]
