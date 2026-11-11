@@ -4,10 +4,13 @@
   {"model": "gastos.categoria", "pk": 103, "fields": {"nome": "estudos"}},
 
   {"model": "gastos.ciclo", "pk": 101, "fields": {
-    "conta": 1, "mes_referencia": "2026-10-01", "data_inicio": "2026-10-06",
-    "data_fechamento": "2026-10-30", "saldo_inicial": "700.00"}},
+    "conta": 1, "mes_referencia": "2026-10-01", "data_inicio": "2026-09-29",
+    "data_fechamento": "2026-10-30", "saldo_inicial": "880.00"}},
+  {"model": "gastos.ciclo", "pk": 1, "fields": {
+    "conta": 1, "mes_referencia": "2026-11-01", "data_inicio": "2026-10-30",
+    "data_fechamento": "2026-11-29", "saldo_inicial": "1500.00"}},
   {"model": "gastos.ciclo", "pk": 102, "fields": {
-    "conta": 1, "mes_referencia": "2026-12-01", "data_inicio": "2026-12-06",
+    "conta": 1, "mes_referencia": "2026-12-01", "data_inicio": "2026-11-29",
     "data_fechamento": "2026-12-30", "saldo_inicial": "0.00"}},
 
   {"model": "gastos.gastofixo", "pk": 101, "fields": {
@@ -36,5 +39,7 @@
     "ciclo": 1, "categoria": null, "descricao": "", "valor": "15.00", "data": "2026-11-27"}},
 
   {"model": "gastos.gasto", "pk": 109, "fields": {
-    "ciclo": 102, "categoria": 101, "descricao": "Pizza (depois do fechamento)", "valor": "54.00", "data": "2026-11-30"}}
+    "ciclo": 102, "categoria": 101, "descricao": "Pizza (depois do fechamento)", "valor": "54.00", "data": "2026-11-30"}},
+  {"model": "gastos.gasto", "pk": 110, "fields": {
+    "ciclo": 102, "categoria": 101, "descricao": "Lanche (dia do fechamento)", "valor": "12.00", "data": "2026-11-29"}}
 ]
