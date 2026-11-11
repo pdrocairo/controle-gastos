@@ -3,6 +3,13 @@ from decimal import Decimal
 from .models import Ciclo, Conta, Gasto, GastoFixo
 from datetime import date, timedelta
 
+
+# provisório ate que implemente User
+class ContaService:
+    @staticmethod
+    def busca_conta():
+        return Conta.objects.order_by("pk").first()
+        
 class CicloService:
     @staticmethod
     def ciclo_da_data(conta: Conta, data: date) -> Ciclo | None:
@@ -46,7 +53,7 @@ class CicloService:
             while hoje >= ultimo_ciclo.data_fechamento:
                 ultimo_ciclo = CicloService.criar_proximo_ciclo(ultimo_ciclo)
 
-            return ultimo_ciclo
+            return CicloService.ciclo_da_data(conta, hoje)
 
 class PainelService:
     def __init__(self, ciclo: Ciclo, hoje: date):

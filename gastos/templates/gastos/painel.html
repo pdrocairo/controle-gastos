@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Painel · {{ conta.nome }}</title>
+    <style>
+        :root {
+            --bg: #f4f5f7;
+            --card: #ffffff;
+            --text: #1f2933;
+            --muted: #6b7785;
+            --border: #e3e7ec;
+            --ok: #15803d;
+            --ok-bg: #e7f6ec;
+            --danger: #b91c1c;
+            --danger-bg: #fdecec;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #12161b;
+                --card: #1b2128;
+                --text: #e6e9ed;
+                --muted: #93a0ae;
+                --border: #2b333c;
+                --ok: #4ade80;
+                --ok-bg: #12301f;
+                --danger: #f87171;
+                --danger-bg: #3a1717;
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 24px 16px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.4;
+        }
+        main { max-width: 480px; margin: 0 auto; }
+        header { margin-bottom: 16px; }
+        h1 { margin: 0; font-size: 1.4rem; }
+        .ciclo { margin: 4px 0 0; color: var(--muted); font-size: 0.9rem; }
+
+        .alerta {
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: var(--danger-bg);
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .destaque { text-align: center; }
+        .destaque .rotulo { margin: 0; color: var(--muted); font-size: 0.9rem; }
+        .destaque .valor {
+            margin: 4px 0 12px;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--ok);
+        }
+        .destaque.estourado .valor { color: var(--danger); }
+        .destaque .detalhes {
+            display: flex;
+            justify-content: center;
+            gap: 8px 20px;
+            flex-wrap: wrap;
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        .destaque .detalhes strong { color: var(--text); }
+
+        h2 { margin: 0 0 12px; font-size: 1rem; }
+        dl { margin: 0; }
+        .linha {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .linha:last-child { border-bottom: 0; }
+        .linha dt { color: var(--muted); }
+        .linha dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+        .linha.total { font-size: 1.05rem; }
+        .linha.total dt { color: var(--text); font-weight: 600; }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>{{ conta.nome }} · {{ conta.banco }}</h1>
+            <p class="ciclo">
+                Ciclo de {{ ciclo.data_inicio|date:"d/m/Y" }} até {{ ciclo.data_fechamento|date:"d/m/Y" }}
+            </p>
+        </header>
+
+        {% if estourou_orcamento %}
+            <div class="alerta" role="alert">Orçamento estourado!</div>
+        {% endif %}
+
+        <section class="card destaque {% if estourou_orcamento %}estourado{% endif %}">
+            <p class="rotulo">Você pode gastar</p>
+            <p class="valor">R$ {{ saldo|floatformat:2 }}</p>
+            <p class="detalhes">
+                <span>Por dia: <strong>R$ {{ gastos_por_dia|floatformat:2 }}</strong></span>
+                <span>
+                    {% if dias_restantes == 0 %}
+                        <strong>Ciclo fechando hoje</strong>
+                    {% else %}
+                        Faltam <strong>{{ dias_restantes }}</strong> dia{{ dias_restantes|pluralize }}
+                    {% endif %}
+                </span>
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Resumo</h2>
+            <dl>
+                <div class="linha">
+                    <dt>Saldo inicial</dt>
+                    <dd>R$ {{ ciclo.saldo_inicial|floatformat:2 }}</dd>
+                </div>
+                <div class="linha">
+                    <dt>Gastos fixos</dt>
+                    <dd>R$ {{ gastos_fixos|floatformat:2 }}</dd>
+                </div>
+                <div class="linha">
+                    <dt>Gastos do ciclo</dt>
+                    <dd>R$ {{ gastos_variaveis|floatformat:2 }}</dd>
+                </div>
+            </dl>
+        </section>
+    </main>
+</body>
+</html>
