@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=80)
@@ -11,6 +11,7 @@ class Conta(models.Model):
     nome = models.CharField(max_length=50)
     banco = models.CharField(max_length=50)
     dia_vencimento_fatura = models.PositiveSmallIntegerField()
+    dono = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return f"{self.nome} {self.banco}"

@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from .services import CicloService, PainelService,ContaService
 from datetime import date
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
     return HttpResponse("oi")
 
+@login_required
 def exibir_painel(request):
     hoje = date.today()
     conta = ContaService.busca_conta()
