@@ -2,13 +2,13 @@ from decimal import Decimal
 
 from .models import Ciclo, Conta, Gasto, GastoFixo
 from datetime import date, timedelta
-
+from django.contrib.auth.models import User
 
 # provisório ate que implemente User
 class ContaService:
     @staticmethod
-    def busca_conta():
-        return Conta.objects.order_by("pk").first()
+    def busca_conta(user: User):
+        return Conta.objects.filter(dono=user).order_by("pk").first()
         
 class CicloService:
     @staticmethod

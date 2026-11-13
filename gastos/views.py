@@ -11,7 +11,7 @@ def home(request):
 @login_required
 def exibir_painel(request):
     hoje = date.today()
-    conta = ContaService.busca_conta()
+    conta = ContaService.busca_conta(request.user)
     
     if conta is None:
         raise Http404("Nenhuma conta cadastrada")
